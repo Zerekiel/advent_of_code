@@ -5,16 +5,19 @@
 int main(int ac, char **av) {
 
     FILE *fp;
-    char buffer[100];
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
 
-    fp = fopen(av[1], "r");
+   fp = fopen(av[1], "r");
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
 
-    if (fp == NULL) {
-        printf("ERROR : File is empty");
-        return 1;
+   while ((read = getline(&line, &len, fp)) != -1) {
+        //printf("Retrieved line of length %zu :\n", read);
+        printf("%s", line);
     }
 
-    fread(buffer, 100, 1, fp);
-    printf("%s\n", buffer);
-    fclose(fp);
+   free(line);
+    exit(EXIT_SUCCESS);
 }

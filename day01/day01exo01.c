@@ -62,5 +62,6 @@ int main(int ac, char **av) {
 
     printf("%d", finalResult);
     free(line);
+    fclose(fp);
     exit(EXIT_SUCCESS);
 }

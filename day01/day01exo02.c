@@ -2,33 +2,21 @@
 #include <string.h>
 #include <stdlib.h>
 
-
-
-
-// o t f s e n
-
-// on check le char d'apres si il est pas == \n
-            // si il match le deuxieme char au cas par cas on regarde le 1 ou les 2 ou les 3 char d'apres
-            // si ça match on prend et on ajoute à la liste des ints sous format char => fct de conversion nombre toute lettre en int ecrit sous format char 
-            // si ça match pas on revient au i et on fait simplement +1 
-
-
 int getFirstAndLastValue(char *strValue) {
 
     char duoResult[2];
     int result = 0;
 
     if (strlen(strValue) == 1) {
-        //on double le chiffre
+        // doubling the alone number
         duoResult[0] = strValue[0];
         duoResult[1] = strValue[0];
     } else {
-        //on prends le premier et le dernier chiffre
+        // taking only first and last digit
         duoResult[0] = strValue[0];
         duoResult[1] = strValue[strlen(strValue) - 1];
     }
     result = atoi(duoResult);
-    printf("%d\n", result);
     free(strValue);
     return result;
 
@@ -57,7 +45,7 @@ int getValueFromLine(char *line) {
         // IF numbers
         if (line[i] > 47 &&  line[i] < 58) {
             strncat(charResult, &line[i], 1);
-        // start like one of those numbers written
+        // ELIF start like one of those numbers written
         } else {
 
             if (line[i] == 'o' && line[i+1] != '\n' && line[i+1] == 'n' && line[i+2] != '\n' && line[i+2] == 'e') {
@@ -108,8 +96,6 @@ int getValueFromLine(char *line) {
         }
         i++;
     }
-    printf("%s\n", line);
-    printf("%s\n", charResult);
     return getFirstAndLastValue(charResult);
 }
 

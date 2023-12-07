@@ -1,6 +1,27 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+#include <stdio.h> 
+
+int getFirstAndLastValue(char *strValue) {
+
+    char duoResult[2];
+    int result = 0;
+
+    if (strlen(strValue) == 1) {
+        //on double le chiffre
+        duoResult[0] = strValue[0];
+        duoResult[1] = strValue[0];
+    } else {
+        //on prends le premier et le dernier chiffre
+        duoResult[0] = strValue[0];
+        duoResult[1] = strValue[strlen(strValue) - 1];
+    }
+    result = atoi(duoResult);
+    printf("%d\n", result);
+    free(strValue);
+    return result;
+
+}
 
 int getValueFromLine(char *line) {
 
@@ -11,8 +32,7 @@ int getValueFromLine(char *line) {
     int i = 0;
     int firstTime = 0; 
     char *charResult;
-    char duoResult[2];
-    int result = 0;
+    
 
     while (i < length) {
         if (line[i] > 47 &&  line[i] < 58) {
@@ -27,19 +47,7 @@ int getValueFromLine(char *line) {
         i++;
     }
 
-    if (strlen(charResult) == 1) {
-        //on double le chiffre
-        duoResult[0] = charResult[0];
-        duoResult[1] = charResult[0];
-    } else {
-        //on prends le premier et le dernier chiffre
-        duoResult[0] = charResult[0];
-        duoResult[1] = charResult[strlen(charResult) - 1];
-    }
-    result = atoi(duoResult);
-    printf("%d\n", result);
-    free(charResult);
-    return result;
+    return getFirstAndLastValue(charResult);
 }
 
 int main(int ac, char **av) {

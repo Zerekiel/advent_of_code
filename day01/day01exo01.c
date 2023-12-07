@@ -25,9 +25,6 @@ int getFirstAndLastValue(char *strValue) {
 
 int getValueFromLine(char *line) {
 
-    //premier et denier chiffre de chaque ligne meme si plusieurs chiffres
-    //si 1 seul chiffre on le double
-
     int length = strlen(line);
     int i = 0;
     int firstTime = 0; 

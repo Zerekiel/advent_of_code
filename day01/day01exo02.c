@@ -3,31 +3,6 @@
 #include <stdlib.h>
 
 
-int getValueFromLine(char *line) {
-
-    int i = 0;
-
-    while (i < strlen(line)) {
-
-        if (line[i] == 'o' || line[i] == 't' || line[i] == 'f' || line[i] == 's' || line[i] == 'e' || line[i] == 'n') {
-
-            if (line[i+1] != '\n') {
-
-
-            
-            
-            
-            
-            
-            }
-        }
-
-        
-
-
-
-        i++;
-    }
 
 
 // o t f s e n
@@ -38,8 +13,104 @@ int getValueFromLine(char *line) {
             // si ça match pas on revient au i et on fait simplement +1 
 
 
+int getFirstAndLastValue(char *strValue) {
 
-    return 0;
+    char duoResult[2];
+    int result = 0;
+
+    if (strlen(strValue) == 1) {
+        //on double le chiffre
+        duoResult[0] = strValue[0];
+        duoResult[1] = strValue[0];
+    } else {
+        //on prends le premier et le dernier chiffre
+        duoResult[0] = strValue[0];
+        duoResult[1] = strValue[strlen(strValue) - 1];
+    }
+    result = atoi(duoResult);
+    printf("%d\n", result);
+    free(strValue);
+    return result;
+
+}
+
+int getValueFromLine(char *line) {
+
+    int length = strlen(line);
+    int i = 0;
+    int firstTime = 0; 
+    char *charResult;
+    
+
+    while (i < length) {
+
+        // Initialization of string containing result or reallocation
+        if (firstTime == 0) {
+                charResult = malloc(1);
+                firstTime = 1;
+            } else {
+                charResult = realloc(charResult, 1);
+            }
+
+
+
+        // IF numbers
+        if (line[i] > 47 &&  line[i] < 58) {
+            strncat(charResult, &line[i], 1);
+        // start like one of those numbers written
+        } else {
+
+            if (line[i] == 'o' && line[i+1] != '\n' && line[i+1] == 'n' && line[i+2] != '\n' && line[i+2] == 'e') {
+                strncat(charResult, "1", 1);
+                i++;
+            }
+            else if (line[i] == 't') {
+                if (line[i+1] != '\n' && line[i+1] == 'w' && line[i+2] != '\n' && line[i+2] == 'o') {
+                    strncat(charResult, "2", 1);
+                    i += 1;
+                } else if (line[i+1] != '\n' && line[i+1] == 'h' && line[i+2] != '\n' && line[i+2] == 'r' && line[i+3] != '\n' && line[i+3] == 'e' && line[i+4] != '\n' && line[i+4] == 'e') {
+                    strncat(charResult, "3", 1);
+                    i += 3;
+                }
+            }
+            else if (line[i] == 'f') {
+                if (line[i+1] != '\n' && line[i+1] == 'o' && line[i+2] != '\n' && line[i+2] == 'u' && line[i+3] != '\n' && line[i+3] == 'r') {
+                    strncat(charResult, "4", 1);
+                    i += 2;
+                }
+                else if (line[i+1] != '\n' && line[i+1] == 'i' && line[i+2] != '\n' && line[i+2] == 'v' && line[i+3] != '\n' && line[i+3] == 'e') {
+                    strncat(charResult, "5", 1);
+                    i += 2;
+                }
+            }
+            else if (line[i] == 's') {
+                if (line[i+1] != '\n' && line[i+1] == 'i' && line[i+2] != '\n' && line[i+2] == 'x') {
+                    strncat(charResult, "6", 1);
+                    i += 1;
+                }
+                else if (line[i+1] != '\n' && line[i+1] == 'e' && line[i+2] != '\n' && line[i+2] == 'v' && line[i+3] != '\n' && line[i+3] == 'e' && line[i+4] != '\n' && line[i+4] == 'n') {
+                    strncat(charResult, "7", 1);
+                    i += 3;
+                }
+            }
+            else if (line[i] == 'e') {
+                if (line[i+1] != '\n' && line[i+1] == 'i' && line[i+2] != '\n' && line[i+2] == 'g' && line[i+3] != '\n' && line[i+3] == 'h' && line[i+4] != '\n' && line[i+4] == 't') {
+                    strncat(charResult, "8", 1);
+                    i += 3;
+                }
+            }
+            else if (line[i] == 'n') {
+                if (line[i+1] != '\n' && line[i+1] == 'i' && line[i+2] != '\n' && line[i+2] == 'n' && line[i+3] != '\n' && line[i+3] == 'e') {
+                    strncat(charResult, "9", 1);
+                    i += 2;
+                }
+            }
+        }
+        i++;
+    }
+    printf("%s\n", line);
+    printf("%s\n", charResult);
+    return getFirstAndLastValue(charResult);
 }
 
 int main(int ac, char **av) {

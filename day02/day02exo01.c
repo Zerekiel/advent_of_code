@@ -44,6 +44,7 @@ int checkLine(char *line) {
                 globalValueOfLine = checkValue(atoi(value), line[i+2]);
                 i++;
             }
+            free(value);
         }
         i++;
         if (globalValueOfLine == 1)
